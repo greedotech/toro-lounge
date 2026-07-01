@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toro Lounge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black: #0c0907;
+    --maroon: #3a0d12;
+    --maroon-deep: #260810;
+    --gold: #c9a24b;
+    --gold-bright: #e9c876;
+    --red: #b3122a;
+    --cream: #f3e9d2;
+    --line: rgba(201,162,75,0.25);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background: var(--black);
+    color: var(--cream);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3, .wordmark{
+    font-family:'Anton', sans-serif;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+
+  /* NAV */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 32px;
+    background: linear-gradient(180deg, rgba(12,9,7,0.95), rgba(12,9,7,0));
+    backdrop-filter: blur(2px);
+  }
+  .wordmark{font-size: 1.5rem; color: var(--gold-bright); display:flex; align-items:center; gap:8px;}
+  .wordmark span{color:var(--red);}
+  .nav-links{display:flex; gap:32px; font-size:0.85rem; letter-spacing:0.08em; text-transform:uppercase; font-weight:600;}
+  .nav-links a{opacity:0.85; transition:opacity .2s, color .2s;}
+  .nav-links a:hover{opacity:1; color:var(--gold-bright);}
+  .nav-cta{
+    border:1px solid var(--gold); padding:9px 18px; border-radius:2px;
+    font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:700;
+    transition: background .2s, color .2s;
+  }
+  .nav-cta:hover{background:var(--gold); color:var(--black);}
+  @media (max-width:760px){
+    .nav-links{display:none;}
+    nav{padding:14px 18px;}
+    .wordmark img{height:40px;}
+    .nav-cta{padding:7px 14px; font-size:0.7rem;}
+    .hero{min-height:560px;}
+    .hero-content{padding-bottom:50px;}
+    .hero-content > img{height:120px !important;}
+    .hero p.sub{font-size:0.95rem;}
+    .hero-ctas{flex-direction:column; align-items:stretch;}
+    .btn{justify-content:center;}
+    .section{padding:70px 0;}
+    .wrap{padding:0 20px;}
+    .visit{height:auto; min-height:520px; padding:70px 0;}
+    .visit-content{max-width:100%;}
+    .social-row{gap:10px;}
+    .social-pill{padding:11px 16px; font-size:0.75rem;}
+  }
+  @media (max-width:420px){
+    .hero h1{font-size:2.6rem;}
+  }
+
+  /* HERO */
+  .hero{
+    position:relative;
+    height:100vh; min-height:640px;
+    display:flex; align-items:flex-end;
+    overflow:hidden;
+  }
+  .hero img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    object-position: center 30%;
+    filter: saturate(1.05) contrast(1.05);
+  }
+  .hero::before{
+    content:''; position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(12,9,7,0.55) 0%, rgba(12,9,7,0.25) 35%, rgba(12,9,7,0.92) 100%);
+  }
+  .hero::after{
+    content:''; position:absolute; inset:0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(179,18,42,0.25), transparent 60%);
+  }
+  .hero-content{ position:relative; z-index:2; padding: 0 0 80px; width:100%;}
+  .eyebrow{
+    color: var(--gold-bright); font-size:0.85rem; letter-spacing:0.3em; text-transform:uppercase;
+    font-weight:700; margin-bottom:18px; display:block;
+  }
+  .hero h1{
+    font-size: clamp(3.2rem, 9vw, 7.2rem);
+    line-height: 0.95;
+    color: var(--cream);
+    text-shadow: 0 6px 30px rgba(0,0,0,0.6);
+  }
+  .hero h1 em{
+    font-style:normal; color: var(--red);
+    -webkit-text-stroke: 2px var(--gold-bright);
+  }
+  .hero p.sub{
+    max-width:520px; margin-top:22px; font-size:1.05rem; color: rgba(243,233,210,0.85); line-height:1.55;
+  }
+  .hero-ctas{ display:flex; gap:18px; margin-top:36px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:16px 30px; font-weight:700; font-size:0.85rem;
+    letter-spacing:0.08em; text-transform:uppercase; border-radius:3px;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-primary{ background: var(--red); color: var(--cream); box-shadow: 0 8px 24px rgba(179,18,42,0.4);}
+  .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 12px 28px rgba(179,18,42,0.55);}
+  .btn-outline{ border:1px solid var(--gold); color: var(--gold-bright);}
+  .btn-outline:hover{ transform: translateY(-2px); background: rgba(201,162,75,0.1);}
+
+  /* SECTION HEADERS */
+  .section{ padding: 110px 0; position:relative;}
+  .section-head{ max-width:640px; margin-bottom:56px;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{ font-size: clamp(2.2rem, 4.5vw, 3.4rem); color: var(--cream); line-height:1.05;}
+  .section-head p{ margin-top:16px; color: rgba(243,233,210,0.7); font-size:1.05rem; line-height:1.6;}
+
+  /* GAMES */
+  .games{ background: linear-gradient(180deg, var(--black), var(--maroon-deep) 18%, var(--black) 92%); position:relative; overflow:hidden;}
+  .games-grid{
+    display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap:22px;
+  }
+  .game-card{
+    border:1px solid var(--line); background: linear-gradient(160deg, rgba(201,162,75,0.06), rgba(201,162,75,0) 60%);
+    padding: 28px 24px 24px; border-radius:4px; position:relative;
+    transition: border-color .25s, transform .25s, background .25s;
+  }
+  .game-card:hover{ border-color: var(--gold); transform: translateY(-4px); background: linear-gradient(160deg, rgba(201,162,75,0.12), rgba(201,162,75,0) 70%);}
+  .chip{
+    width:56px; height:56px; border-radius:50%;
+    border:3px dashed var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Anton', sans-serif; color: var(--gold-bright); font-size:1rem;
+    margin-bottom: 18px;
+    background: radial-gradient(circle, rgba(179,18,42,0.25), transparent 70%);
+    overflow:hidden;
+  }
+  .chip img{ width:100%; height:100%; object-fit:cover; border-radius:50%;}
+  .game-card h3{ font-size:1.15rem; color: var(--cream); margin-bottom:8px; letter-spacing:0.01em;}
+  .game-card p{ font-size:0.92rem; color: rgba(243,233,210,0.6); line-height:1.5;}
+  .tag{
+    display:inline-block; margin-top:14px; font-size:0.7rem; letter-spacing:0.1em;
+    text-transform:uppercase; color: var(--red); font-weight:700;
+    border:1px solid rgba(179,18,42,0.5); padding:4px 10px; border-radius:20px;
+  }
+
+  /* VISIT / SOCIALS */
+  .visit{
+    position:relative; overflow:hidden;
+    padding: 0; height: 560px; display:flex; align-items:center;
+  }
+  .visit img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 35%;}
+  .visit::before{ content:''; position:absolute; inset:0; background: linear-gradient(100deg, rgba(12,9,7,0.96) 0%, rgba(12,9,7,0.75) 45%, rgba(12,9,7,0.35) 100%);}
+  .visit-content{ position:relative; z-index:2; max-width:560px;}
+  .visit h2{ font-size: clamp(2.2rem,4.5vw,3.2rem); color: var(--cream); margin-bottom:18px; line-height:1.05;}
+  .visit p{ color: rgba(243,233,210,0.8); font-size:1.05rem; line-height:1.6; margin-bottom:30px;}
+  .social-row{ display:flex; gap:14px; flex-wrap:wrap;}
+  .social-pill{
+    border:1px solid var(--gold); padding:13px 22px; border-radius:30px;
+    font-size:0.82rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+    display:flex; align-items:center; gap:8px;
+    transition: background .2s, color .2s, transform .2s;
+  }
+  .social-pill:hover{ background: var(--gold); color: var(--black); transform: translateY(-2px);}
+
+  /* RULES / T&C */
+  .rules{ background: var(--maroon-deep); border-top:1px solid var(--line); border-bottom:1px solid var(--line); position:relative; overflow:hidden;}
+  .rules-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:50px;}
+  .rules-grid ol{ counter-reset: rule; list-style:none;}
+  .rules-grid li{
+    counter-increment: rule; position:relative; padding-left:42px; margin-bottom:22px;
+    font-size:0.95rem; line-height:1.6; color: rgba(243,233,210,0.85);
+  }
+  .rules-grid li::before{
+    content: counter(rule, decimal-leading-zero);
+    position:absolute; left:0; top:0;
+    font-family:'Anton', sans-serif; color: var(--gold); font-size:1.1rem;
+  }
+  @media (max-width:760px){ .rules-grid{grid-template-columns:1fr;} }
+
+  /* FOOTER */
+  footer{ padding: 50px 0 36px; text-align:center;}
+  footer .wordmark{ justify-content:center; font-size:1.2rem; margin-bottom:8px;}
+  footer p{ font-size:0.8rem; color: rgba(243,233,210,0.45);}
+
+  .reveal{ opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease;}
+  .reveal.in{ opacity:1; transform:none;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .reveal{transition:none; opacity:1; transform:none;}
+  }
+
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--gold-bright); outline-offset:3px;}
+
+  /* CRITTERS: tumbleweeds + bull silhouettes */
+  .critter-layer{
+    position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:1;
+  }
+  .tumbleweed{
+    position:absolute; bottom: 6%; left:-80px; width:54px; height:54px; opacity:0.85;
+    animation: roll-across linear infinite;
+  }
+  .tumbleweed svg{ width:100%; height:100%; }
+  .tumbleweed.t2{ width:34px; height:34px; bottom:10%; opacity:0.6; }
+  .tumbleweed.t3{ width:70px; height:70px; bottom:3%; opacity:0.7; }
+
+  @keyframes roll-across{
+    0%{ transform: translateX(0) rotate(0deg); }
+    100%{ transform: translateX(calc(100vw + 160px)) rotate(900deg); }
+  }
+
+  .bull-walk{
+    position:absolute; bottom:4%; left:-120px; width:90px; opacity:0.5;
+    animation: walk-across linear infinite;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+  }
+  .bull-walk svg{ width:100%; display:block; }
+
+  @keyframes walk-across{
+    0%{ transform: translateX(0); }
+    100%{ transform: translateX(calc(100vw + 200px)); }
+  }
+  @keyframes walk-across-flip{
+    0%{ transform: scaleX(-1) translateX(0); }
+    100%{ transform: scaleX(-1) translateX(calc(-100vw - 200px)); }
+  }
+  .bull-walk.flip{ animation-name: walk-across-flip; left:auto; right:-120px; }
+
+  @media (prefers-reduced-motion: reduce){
+    .tumbleweed, .bull-walk{ animation: none; display:none; }
+  }
+  @media (max-width: 600px){
+    .bull-walk{ width:60px; }
+    .tumbleweed{ width:38px; height:38px; }
+    .tumbleweed.t3{ width:50px; height:50px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#top" class="wordmark">TOR<span>O</span> LOUNGE</a>
+  <div class="nav-links">
+    <a href="#games">Games</a>
+    <a href="#rules">House Rules</a>
+    <a href="#visit">Visit Us</a>
+  </div>
+  <a href="#visit" class="nav-cta">Talk To The Matadors</a>
+</nav>
+
+<section class="hero" id="top">
+  <img src="assets/hero-stampede.jpg" alt="A herd of bulls charging through the Toro Lounge casino floor">
+  <div class="critter-layer" aria-hidden="true">
+    <div class="tumbleweed t1" style="animation-duration:14s; animation-delay:0s;">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke="#caa24f" stroke-width="2" opacity="0.9"><circle cx="32" cy="32" r="22"/><path d="M10 32c6-10 16-16 22-22M54 32c-6 10-16 16-22 22M32 10c10 6 16 16 22 22M32 54c-10-6-16-16-22-22M14 18c8 2 14 8 16 16M50 46c-8-2-14-8-16-16M14 46c8-2 14-8 16-16M50 18c-8 2-14 8-16 16"/></g></svg>
+    </div>
+    <div class="tumbleweed t2" style="animation-duration:10s; animation-delay:3s;">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke="#caa24f" stroke-width="2" opacity="0.8"><circle cx="32" cy="32" r="22"/><path d="M10 32c6-10 16-16 22-22M54 32c-6 10-16 16-22 22M32 10c10 6 16 16 22 22M32 54c-10-6-16-16-22-22"/></g></svg>
+    </div>
+    <div class="bull-walk" style="animation-duration:22s; animation-delay:1s;">
+      <svg viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg"><g fill="#0c0907" opacity="0.55">
+        <path d="M14 14c-4-3-9-2-10 2-1 3 2 5 5 5 2 4 6 6 10 6l3 6c-6 1-10 5-10 9 0 1 1 2 2 2 1-3 4-5 7-5l2 10-6 1c-1 0-2 1-2 2s1 2 2 2l9-1 3 5h22l3-5 9 1c1 0 2-1 2-2s-1-2-2-2l-6-1 2-10c3 0 6 2 7 5 1 0 2-1 2-2 0-4-4-8-10-9l3-6c4 0 8-2 10-6 3 0 6-2 5-5-1-4-6-5-10-2-2-3-6-5-10-5-3-5-9-8-16-8s-13 3-16 8c-4 0-8 2-10 5z"/>
+        <path d="M22 16c-3-5-2-10 1-12 2-1 4 0 4 2-2 2-2 5 0 8z"/>
+        <path d="M88 16c3-5 2-10-1-12-2-1-4 0-4 2 2 2 2 5 0 8z"/>
+      </g></svg>
+    </div>
+  </div>
+  <div class="hero-content wrap">
+    <span class="eyebrow">A Stampede Of A Good Time</span>
+    <h1>RUN WITH<br>THE <em>BULLS</em></h1>
+    <p class="sub">Toro Lounge brings the charge of the corral to the casino floor. Bold games, gold-trimmed nights, and a crew of Matadors always ready to talk you through the action.</p>
+    <div class="hero-ctas">
+      <a href="#games" class="btn btn-primary">View The Games</a>
+      <a href="#visit" class="btn btn-outline">Talk To The Matadors</a>
+    </div>
+  </div>
+</section>
+
+<section class="section games" id="games">
+  <div class="critter-layer" aria-hidden="true">
+    <div class="tumbleweed t3" style="animation-duration:16s; animation-delay:2s;">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke="#caa24f" stroke-width="2" opacity="0.7"><circle cx="32" cy="32" r="22"/><path d="M10 32c6-10 16-16 22-22M54 32c-6 10-16 16-22 22M32 10c10 6 16 16 22 22M32 54c-10-6-16-16-22-22M14 18c8 2 14 8 16 16M50 46c-8-2-14-8-16-16"/></g></svg>
+    </div>
+    <div class="bull-walk flip" style="animation-duration:26s; animation-delay:4s; opacity:0.35;">
+      <svg viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg"><g fill="#c9a24b" opacity="0.6">
+        <path d="M14 14c-4-3-9-2-10 2-1 3 2 5 5 5 2 4 6 6 10 6l3 6c-6 1-10 5-10 9 0 1 1 2 2 2 1-3 4-5 7-5l2 10-6 1c-1 0-2 1-2 2s1 2 2 2l9-1 3 5h22l3-5 9 1c1 0 2-1 2-2s-1-2-2-2l-6-1 2-10c3 0 6 2 7 5 1 0 2-1 2-2 0-4-4-8-10-9l3-6c4 0 8-2 10-6 3 0 6-2 5-5-1-4-6-5-10-2-2-3-6-5-10-5-3-5-9-8-16-8s-13 3-16 8c-4 0-8 2-10 5z"/>
+        <path d="M22 16c-3-5-2-10 1-12 2-1 4 0 4 2-2 2-2 5 0 8z"/>
+        <path d="M88 16c3-5 2-10-1-12-2-1-4 0-4 2 2 2 2 5 0 8z"/>
+      </g></svg>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">On The Floor</span>
+      <h2>Tonight's Lineup</h2>
+      <p>Ten ways to test your nerve. Pull up a stool, the herd's already running.</p>
+    </div>
+    <div class="games-grid">
+      <div class="game-card reveal"><div class="chip"><img src="assets/games/megaspin.jpg" alt="Mega Spin" onerror="this.parentElement.textContent='01'"></div><h3>Mega Spin</h3><p>Spin big, win bigger. Mega Spin brings high-energy slot action to the floor.</p><span class="tag">Slots</span></div>
+      <div class="game-card reveal"><div class="chip"><img src="assets/games/riversweeps.jpg" alt="River Sweeps" onerror="this.parentElement.textContent='02'"></div><h3>River Sweeps</h3><p>Flow your way to fortune with River Sweeps' fan-favorite games.</p><span class="tag">Sweeps</span></div>
+      <div class="game-card reveal"><div class="chip"><img src="assets/games/firekirin.jpg" alt="Fire Kirin" onerror="this.parentElement.textContent='03'"></div><h3>Fire Kirin</h3><p>Mythical creatures, blazing jackpots. Fire Kirin is a Toro staple.</p><span class="tag">Fish</span></div>
+      <div class="game-card reveal"><div class="chip"><img src="assets/games/vegasx.jpg" alt="Vegas-X" onerror="this.parentElement.textContent='04'"></div><h3>Vegas-X</h3><p>Straight from the strip to the lounge — Vegas-X keeps the energy high.</p><span class="tag">Slots</span></div>
+      <div class="game-card reveal"><div class="chip"><img src="assets/games/orionstars.jpg" alt="Orion Stars" onerror="this.parentElement.textContent='05'"></div><h3>Orion Stars</h3><p>Shoot for the stars with Orion's galaxy of games and big payouts.</p><span class="tag">Fish</span></div>
+      <div class="game-card reveal"><div class="chip"><img src="assets/games/goldendragon.jpg" alt="Golden Dragon" onerror="this.parentElement.textContent='06'"></div><h3>Golden Dragon</h3><p>The dragon brings gold. A floor favorite with serious replay value.</p><span class="tag">Fish</span></div>
+      <div class="game-card reveal"><div class="chip"><img src="assets/games/vblink.jpg" alt="Vblink" onerror="this.parentElement.textContent='07'"></div><h3>Vblink</h3><p>Fast-paced, smooth play — Vblink keeps the action moving all night.</p><span class="tag">Slots</span></div>
+      <div class="game-card reveal"><div class="chip"><img src="assets/games/ultrapanda.jpg" alt="Ultra Panda" onerror="this.parentElement.textContent='08'"></div><h3>Ultra Panda</h3><p>Don't let the name fool you — Ultra Panda hits hard and pays out big.</p><span class="tag">Slots</span></div>
+      <div class="game-card reveal"><div class="chip"><img src="assets/games/firephoenix.jpg" alt="Fire Phoenix" onerror="this.parentElement.textContent='09'"></div><h3>Fire Phoenix</h3><p>Rise from the ashes with Fire Phoenix's blazing bonus rounds.</p><span class="tag">Fish</span></div>
+      <div class="game-card reveal"><div class="chip"><img src="assets/games/juwa.jpg" alt="Juwa" onerror="this.parentElement.textContent='10'"></div><h3>Juwa</h3><p>Juwa delivers non-stop action with a huge variety of game styles.</p><span class="tag">Slots</span></div>
+      <div class="game-card reveal"><div class="chip"><img src="assets/games/milkyway.jpg" alt="Milky Way" onerror="this.parentElement.textContent='11'"></div><h3>Milky Way</h3><p>Take your game to another galaxy — Milky Way rewards bold players.</p><span class="tag">Slots</span></div>
+      <div class="game-card reveal"><div class="chip"><img src="assets/games/goldencity.jpg" alt="Golden City" onerror="this.parentElement.textContent='12'"></div><h3>Golden City</h3><p>A city built on winnings. Golden City is where the big money plays.</p><span class="tag">Slots</span></div>
+      <div class="game-card reveal"><div class="chip"><img src="assets/games/dragoncash.jpg" alt="Dragon Cash" onerror="this.parentElement.textContent='13'"></div><h3>Dragon Cash</h3><p>Cash rains down in Dragon Cash — the floor's most talked-about game.</p><span class="tag">Live</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section rules" id="rules">
+  <div class="critter-layer" aria-hidden="true">
+    <div class="tumbleweed t2" style="animation-duration:12s; animation-delay:1.5s; opacity:0.5;">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke="#caa24f" stroke-width="2" opacity="0.6"><circle cx="32" cy="32" r="22"/><path d="M10 32c6-10 16-16 22-22M54 32c-6 10-16 16-22 22M32 10c10 6 16 16 22 22M32 54c-10-6-16-16-22-22"/></g></svg>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Read Before You Ride</span>
+      <h2>House Rules &amp; Terms</h2>
+      <p>Simple terms, no fine print games. By visiting Toro Lounge, in person or online, you agree to the following.</p>
+    </div>
+    <div class="rules-grid">
+      <ol class="reveal">
+        <li>You must be 21 years of age or older to enter the floor or place a bet.</li>
+        <li>Valid government-issued photo ID is required upon request by staff at any time.</li>
+        <li>Toro Lounge is committed to responsible gambling. If you feel your play is becoming a problem, ask our staff about support resources.</li>
+        <li>All games are subject to posted table limits and house odds, which may change without notice.</li>
+        <li>Management reserves the right to refuse service or entry to anyone for any lawful reason.</li>
+      </ol>
+      <ol class="reveal" start="6">
+        <li>Outcomes determined by our games are final once the round is settled.</li>
+        <li>Chips and credits hold no value outside of Toro Lounge and are non-transferable between guests.</li>
+        <li>Photography and recording on the gaming floor are not permitted without prior staff approval.</li>
+        <li>These terms may be updated periodically; the latest version is always posted on this page.</li>
+        <li>Questions about these terms? Our staff are on the floor and online, ready to help.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <img src="assets/stampede-script.jpg" alt="Toro Lounge neon sign with a bull running through the lounge">
+  <div class="wrap">
+    <div class="visit-content reveal">
+      <h2>Got Questions?<br>Talk To The Matadors.</h2>
+      <p>Our Matadors are online and on the floor, ready to walk you through games, table limits, or tonight's specials. Don't wait — just say hello.</p>
+      <div class="social-row">
+        <a href="#" class="social-pill">Instagram</a>
+        <a href="#" class="social-pill">Facebook</a>
+        <a href="#" class="social-pill">X / Twitter</a>
+        <a href="#" class="social-pill">TikTok</a>
+        <a href="#" class="social-pill">Live Chat</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wordmark" style="justify-content:center; margin-bottom:8px;">TOR<span style="color:var(--red);">O</span> LOUNGE</div>
+  <p>© 2026 Toro Lounge. Must be 21+. Please play responsibly.</p>
+</footer>
+
+<script>
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, {threshold:0.15});
+  items.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
