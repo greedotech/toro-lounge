@@ -68,6 +68,7 @@
     .wrap{padding:0 20px;}
     .visit{height:auto; min-height:520px; padding:70px 0;}
     .visit-content{max-width:100%;}
+    .visit > .wrap > div > img { display: none; }
     .social-row{gap:10px;}
     .social-pill{padding:11px 16px; font-size:0.75rem;}
   }
@@ -165,10 +166,9 @@
   /* VISIT / SOCIALS */
   .visit{
     position:relative; overflow:hidden;
-    padding: 0; height: 560px; display:flex; align-items:center;
+    padding: 80px 0; background: var(--black);
+    display:flex; align-items:center;
   }
-  .visit img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 35%;}
-  .visit::before{ content:''; position:absolute; inset:0; background: linear-gradient(100deg, rgba(12,9,7,0.96) 0%, rgba(12,9,7,0.75) 45%, rgba(12,9,7,0.35) 100%);}
   .visit-content{ position:relative; z-index:2; max-width:560px;}
   .visit h2{ font-size: clamp(2.2rem,4.5vw,3.2rem); color: var(--cream); margin-bottom:18px; line-height:1.05;}
   .visit p{ color: rgba(243,233,210,0.8); font-size:1.05rem; line-height:1.6; margin-bottom:30px;}
@@ -364,18 +364,21 @@
 </section>
 
 <section class="visit" id="visit">
-  <img src="assets/stampede-script.jpg" alt="Toro Lounge neon sign with a bull running through the lounge">
   <div class="wrap">
-    <div class="visit-content reveal">
-      <h2>Got Questions?<br>Talk To The Matadors.</h2>
-      <p>Our Matadors are online and on the floor, ready to walk you through games, table limits, or tonight's specials. Don't wait — just say hello.</p>
-      <div class="social-row">
-        <a href="#" class="social-pill">Instagram</a>
-        <a href="https://www.facebook.com/TheToroLounge" target="_blank" rel="noopener noreferrer" class="social-pill">Facebook</a>
-        <a href="#" class="social-pill">X / Twitter</a>
-        <a href="#" class="social-pill">TikTok</a>
-        <a href="#" class="social-pill">Live Chat</a>
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:40px; width:100%;">
+      <img src="assets/logo.png" alt="Toro Lounge" style="width:220px; height:auto; mix-blend-mode:screen; filter:drop-shadow(0 4px 24px rgba(179,18,42,0.5)); flex-shrink:0;">
+      <div class="visit-content reveal" style="flex:1; text-align:center;">
+        <h2>Got Questions?<br>Talk To The Matadors.</h2>
+        <p>Our Matadors are online and on the floor, ready to walk you through games, table limits, or tonight's specials. Don't wait — just say hello.</p>
+        <div class="social-row" style="justify-content:center;">
+          <a href="#" class="social-pill">Instagram</a>
+          <a href="https://www.facebook.com/TheToroLounge" target="_blank" rel="noopener noreferrer" class="social-pill">Facebook</a>
+          <a href="#" class="social-pill">X / Twitter</a>
+          <a href="#" class="social-pill">TikTok</a>
+          <a href="#" class="social-pill">Live Chat</a>
+        </div>
       </div>
+      <img src="assets/logo.png" alt="Toro Lounge" style="width:220px; height:auto; mix-blend-mode:screen; filter:drop-shadow(0 4px 24px rgba(179,18,42,0.5)); flex-shrink:0;">
     </div>
   </div>
 </section>
